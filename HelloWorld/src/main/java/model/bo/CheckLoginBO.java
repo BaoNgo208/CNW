@@ -4,6 +4,7 @@ import model.dao.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.apache.jasper.runtime.HttpJspBase;
 public class CheckLoginBO {
 	CheckLoginDAO checkLoginDAO = new CheckLoginDAO();
 	public CheckLoginBO() {
@@ -32,7 +33,23 @@ public class CheckLoginBO {
 		  phongTro = checkLoginDAO.addPhongTro(phongTro);
 		  return phongTro;
 	}
-	
-
+	public PhongTro getPhongTroById(Integer id)throws ClassNotFoundException, SQLException {
+		 return checkLoginDAO.getPhongTroById(id);
+	}
+	public User getUserByPhongTroIdUser(Integer id) throws ClassNotFoundException, SQLException {
+		 return checkLoginDAO.getUserByPhongTroIdUser(id);
+	}
+	public ArrayList<PhongTro>getPhongTrosByIdUse(Integer IdUser) throws ClassNotFoundException, SQLException {
+		 return checkLoginDAO.getPhongTrosByIdUser(IdUser);
+	}
+	public Integer DeletePhongTroById(Integer id) throws ClassNotFoundException, SQLException {
+		return checkLoginDAO.DeletePhongTroById(id);
+	}
+	public PhongTro editPhongTro(PhongTro phongTro) throws SQLException, ClassNotFoundException {
+		 return checkLoginDAO.editPhongTro(phongTro);
+	}
+	public ArrayList<PhongTro> getPhongTroBySearchBar(String searchResult) throws SQLException, ClassNotFoundException {
+		return checkLoginDAO.getPhongTroBySearchBar(searchResult);
+	}
 
 }

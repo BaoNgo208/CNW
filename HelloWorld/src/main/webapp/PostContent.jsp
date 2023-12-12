@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+
+<meta charset="UTF-8" content="text/html">
 <title>Insert title here</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	 <link rel="stylesheet" type="text/css" href="./Style/DangTin.css">
@@ -48,6 +49,12 @@
 			    <label for="Quan class="form-label">Quận</label>
 			    <input type="text" class="form-control" name="Quan">
 			  </div>
+			  
+			   <div class="mb-3">
+			    <label for="Quan class="form-label">Mô Tả</label>
+			    <input type="text" class="form-control" name="MoTa">
+			  </div>
+        	       
         	       
 		  	  <input type="hidden" class="form-control" name="IdUser" value="<%= userId %>">
 		 

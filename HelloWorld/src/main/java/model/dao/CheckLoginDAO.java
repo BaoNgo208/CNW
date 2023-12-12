@@ -77,6 +77,7 @@ public class CheckLoginDAO {
         			 resultSet.getInt("Gia"),
         			 resultSet.getString("DiaChi"),
         			 resultSet.getString("Quan"),
+        			 resultSet.getString("MoTa"),
         			 resultSet.getInt("IdUser")
         	  );
         	  
@@ -124,10 +125,10 @@ public class CheckLoginDAO {
 		     Class.forName("com.mysql.jdbc.Driver");
 		 	
 	
-			 String sql= "INSERT INTO phongtro (Img, TieuDe,DienTich,Gia,DiaChi,Quan,IdUser) VALUES ('"+phongTro.getImg()+"'"
+			 String sql= "INSERT INTO phongtro (Img, TieuDe,DienTich,Gia,DiaChi,Quan,MoTa,IdUser) VALUES ('"+phongTro.getImg()+"'"
 			 		+ ", '"+phongTro.getTieuDe()+"'"
 			 				+ ", '"+phongTro.getDienTich()+"', '"+phongTro.getGia()+"',"
-			 						+ " '"+phongTro.getDiaChi()+"' , '"+phongTro.getQuan()+"', '"+phongTro.getIdUser()+"' ) "; 
+			 						+ " '"+phongTro.getDiaChi()+"' , '"+phongTro.getQuan()+"', '"+phongTro.getMoTa()+"' , '" +phongTro.getIdUser()+"' ) "; 
 			 
 			 
 	         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/HoTroTimTro", "root", "");
@@ -137,10 +138,128 @@ public class CheckLoginDAO {
 		   return phongTro;
 	}
 	
-	public PhongTro getPhongTroById(Integer id) {
+	public PhongTro getPhongTroById(Integer id) throws SQLException, ClassNotFoundException {
+		 
+		  Class.forName("com.mysql.jdbc.Driver");
 		  PhongTro phongTro = null;
-		  
+		  String sql= "SELECT * FROM phongtro WHERE Id='" + id + "'"; 
+	      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/HoTroTimTro", "root", "");
+	      java.sql.Statement statement = connection.createStatement();
+	      ResultSet resultSet = statement.executeQuery(sql);
+	      while(resultSet.next()) {
+	    	 phongTro =  new PhongTro(
+	    			     resultSet.getInt("Id"),
+	        			 resultSet.getString("Img"),
+	        			 resultSet.getString("TieuDe"),
+	        			 resultSet.getInt("DienTich"),
+	        			 resultSet.getInt("Gia"),
+	        			 resultSet.getString("DiaChi"),
+	        			 resultSet.getString("Quan"),
+	        			 resultSet.getString("MoTa"),
+	        			 resultSet.getInt("IdUser")
+	    		   
+	    	  );
+	      }
 		  return phongTro;
+	}
+	public User getUserByPhongTroIdUser(Integer id) throws SQLException, ClassNotFoundException  {
+		  Class.forName("com.mysql.jdbc.Driver");
+		  User user = null;
+		  String sql= "SELECT * FROM sinhvien WHERE id='" + id + "'"; 
+	      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dulieu", "root", "");
+	      java.sql.Statement statement = connection.createStatement();
+	      ResultSet resultSet = statement.executeQuery(sql);
+	      
+	      while(resultSet.next()) {
+	    	    user = new User(resultSet.getInt("id"),resultSet.getString("name"));
+	      }
+		  return user;
+	}
+	
+	public ArrayList<PhongTro> getPhongTrosByIdUser(Integer IdUser)  throws SQLException, ClassNotFoundException {
+		 Class.forName("com.mysql.jdbc.Driver");
+		 ArrayList<PhongTro> phongTros = new ArrayList<PhongTro>();
+		 String sql= "SELECT * FROM phongtro WHERE IdUser='" + IdUser + "'"; 
+         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/HoTroTimTro", "root", "");
+         java.sql.Statement statement = connection.createStatement();
+         ResultSet resultSet = statement.executeQuery(sql);
+         
+         while(resultSet.next()) {
+        	  PhongTro phongTro = new PhongTro(
+         			 resultSet.getInt("Id"),
+         			 resultSet.getString("Img"),
+         			 resultSet.getString("TieuDe"),
+         			 resultSet.getInt("DienTich"),
+         			 resultSet.getInt("Gia"),
+         			 resultSet.getString("DiaChi"),
+         			 resultSet.getString("Quan"),
+         			 resultSet.getString("MoTa"),
+         			 resultSet.getInt("IdUser")
+         	  );
+        	  
+        	  phongTros.add(phongTro);
+        	   
+         }       
+         
+		return phongTros;
+	}
+	public Integer DeletePhongTroById(Integer id)  throws SQLException, ClassNotFoundException{
+		PhongTro phongTro = null;
+		
+		   Class.forName("com.mysql.jdbc.Driver");
+		 	
+			
+			 String sql= "DELETE FROM phongtro WHERE Id ='" + id  + "'"; 
+			 
+			 
+	         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/HoTroTimTro", "root", "");
+	         java.sql.Statement statement = connection.createStatement();
+	         statement.executeUpdate(sql);
+	         return id;
+	}
+	
+	public PhongTro editPhongTro(PhongTro phongTro) throws SQLException, ClassNotFoundException {
+		
+	     Class.forName("com.mysql.jdbc.Driver");		
+		 String sql= "UPDATE phongtro SET Img ='" + phongTro.getImg() + "',TieuDe = '" +
+		 phongTro.getTieuDe() + "',DienTich = '" + phongTro.getDienTich() + "',Gia = '" +
+		 phongTro.getGia() + "',DiaChi = '" + phongTro.getDiaChi() + "',Quan = '" +
+		 phongTro.getQuan() +"',MoTa = '" + phongTro.getMoTa() + "' WHERE Id= '" + phongTro.getId() + "';"
+		 ; 
+		 
+		 
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/HoTroTimTro", "root", "");
+        java.sql.Statement statement = connection.createStatement();
+        statement.executeUpdate(sql);
+        
+		  return phongTro;
+	}
+	public ArrayList<PhongTro> getPhongTroBySearchBar(String searchResult) throws ClassNotFoundException, SQLException {
+		  ArrayList<PhongTro> phongTros = new ArrayList<PhongTro>();
+		  
+		  Class.forName("com.mysql.jdbc.Driver");
+		  String sql="SELECT * FROM phongtro WHERE TieuDe LIKE '%" + searchResult + "%';";
+	      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/HoTroTimTro", "root", "");
+	      java.sql.Statement statement = connection.createStatement();
+	      ResultSet resultSet = statement.executeQuery(sql);
+		  
+	      while(resultSet.next()) {
+	    	   PhongTro phongTro = new PhongTro(
+	    			   resultSet.getInt("Id"),
+	         			 resultSet.getString("Img"),
+	         			 resultSet.getString("TieuDe"),
+	         			 resultSet.getInt("DienTich"),
+	         			 resultSet.getInt("Gia"),
+	         			 resultSet.getString("DiaChi"),
+	         			 resultSet.getString("Quan"),
+	         			 resultSet.getString("MoTa"),
+	         			 resultSet.getInt("IdUser")
+	    	   );
+	    	   
+	    	   phongTros.add(phongTro);
+	      }
+		  
+		  return phongTros;
 	}
 
 }

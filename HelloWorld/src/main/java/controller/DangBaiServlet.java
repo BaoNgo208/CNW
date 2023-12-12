@@ -40,6 +40,7 @@ public class DangBaiServlet extends HttpServlet{
 					Integer.parseInt(request.getParameter("Gia")) ,
 					request.getParameter("DiaChi"),
 					request.getParameter("Quan"),
+					request.getParameter("MoTa"),
 					Integer.parseInt(request.getParameter("IdUser")) 
 			);
 			

@@ -13,47 +13,40 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.bean.PhongTro;
 import model.bean.User;
-import model.bean.Wife;
 import model.bo.CheckLoginBO;
 
-@WebServlet("/detail")
-public class DetailServlet extends HttpServlet {
+@WebServlet("/RedirectEditFormServlet")
+public class RedirectEditFormServlet extends HttpServlet{
 
-	public DetailServlet() {
+	public RedirectEditFormServlet() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		  CheckLoginBO checkLoginBO = new CheckLoginBO();
-		
-		  
+		 CheckLoginBO checkLoginBO = new CheckLoginBO();
+	
 		  try {
-			  Integer id = Integer.parseInt(request.getParameter("Id")) ;
-			  String destination = "/Detail.jsp"; 
-			  PhongTro phongTro = checkLoginBO.getPhongTroById(id);
-			  User user = checkLoginBO.getUserByPhongTroIdUser(phongTro.getIdUser());
-			  ArrayList<PhongTro> phongTros = checkLoginBO.getPhongTroList();
-			  
-			  request.setAttribute("phongtrolist", phongTros);
+			  String destination = "/Edit.jsp";
+			  PhongTro phongTro = checkLoginBO.getPhongTroById(Integer.parseInt(request.getParameter("phongTroId")));
 			  request.setAttribute("phongTro", phongTro);
-			  request.setAttribute("User", user);
+			  request.setAttribute("UserId", Integer.parseInt(request.getParameter("UserId")));
 			  RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
 			  rd.forward(request, response);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		  
+		  
+	
 	}
-
-
+	
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
 		
 	}
+	
 
 }
