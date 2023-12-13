@@ -1,9 +1,12 @@
 package model.bo;
-import model.bean.*;
-import model.dao.*;
+
+import model.bean.PhongTro;
+import model.bean.User;
+import model.dao.CheckLoginDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 public class CheckLoginBO {
 	CheckLoginDAO checkLoginDAO = new CheckLoginDAO();
 	public CheckLoginBO() {
@@ -33,6 +36,11 @@ public class CheckLoginBO {
 		  return phongTro;
 	}
 	
+	public void Duyet(PhongTro phongTro) { checkLoginDAO.DuyetPhongTro(phongTro);}
 
-
+	public PhongTro GetPhongTroByID(int id ) throws SQLException, ClassNotFoundException {return checkLoginDAO.getPhongTroById(id);}
+	public ArrayList<User> GetAllUser() {return checkLoginDAO.GetAllUser();}
+	public ArrayList<PhongTro> GetAllPost() throws SQLException, ClassNotFoundException {return checkLoginDAO.GetAllPost();}
+	public String GetUsernameByID(int id) {return  checkLoginDAO.GetUsernameByID(id);}
+	public void RemovePost(int id) {checkLoginDAO.RemovePost(id);}
 }
