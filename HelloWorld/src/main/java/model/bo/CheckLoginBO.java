@@ -1,10 +1,12 @@
 package model.bo;
-import model.bean.*;
-import model.dao.*;
+
+import model.bean.PhongTro;
+import model.bean.User;
+import model.dao.CheckLoginDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.apache.jasper.runtime.HttpJspBase;
+
 public class CheckLoginBO {
 	CheckLoginDAO checkLoginDAO = new CheckLoginDAO();
 	public CheckLoginBO() {
@@ -33,23 +35,12 @@ public class CheckLoginBO {
 		  phongTro = checkLoginDAO.addPhongTro(phongTro);
 		  return phongTro;
 	}
-	public PhongTro getPhongTroById(Integer id)throws ClassNotFoundException, SQLException {
-		 return checkLoginDAO.getPhongTroById(id);
-	}
-	public User getUserByPhongTroIdUser(Integer id) throws ClassNotFoundException, SQLException {
-		 return checkLoginDAO.getUserByPhongTroIdUser(id);
-	}
-	public ArrayList<PhongTro>getPhongTrosByIdUse(Integer IdUser) throws ClassNotFoundException, SQLException {
-		 return checkLoginDAO.getPhongTrosByIdUser(IdUser);
-	}
-	public Integer DeletePhongTroById(Integer id) throws ClassNotFoundException, SQLException {
-		return checkLoginDAO.DeletePhongTroById(id);
-	}
-	public PhongTro editPhongTro(PhongTro phongTro) throws SQLException, ClassNotFoundException {
-		 return checkLoginDAO.editPhongTro(phongTro);
-	}
-	public ArrayList<PhongTro> getPhongTroBySearchBar(String searchResult) throws SQLException, ClassNotFoundException {
-		return checkLoginDAO.getPhongTroBySearchBar(searchResult);
-	}
+	
+	public void Duyet(PhongTro phongTro) { checkLoginDAO.DuyetPhongTro(phongTro);}
 
+	public PhongTro GetPhongTroByID(int id ) throws SQLException, ClassNotFoundException {return checkLoginDAO.getPhongTroById(id);}
+	public ArrayList<User> GetAllUser() {return checkLoginDAO.GetAllUser();}
+	public ArrayList<PhongTro> GetAllPost() throws SQLException, ClassNotFoundException {return checkLoginDAO.GetAllPost();}
+	public String GetUsernameByID(int id) {return  checkLoginDAO.GetUsernameByID(id);}
+	public void RemovePost(int id) {checkLoginDAO.RemovePost(id);}
 }

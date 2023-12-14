@@ -1,7 +1,5 @@
 package model.bean;
 
-import java.security.KeyStore.PrivateKeyEntry;
-
 public class PhongTro {
 	private String Img;
 	private Integer Id;
@@ -10,19 +8,19 @@ public class PhongTro {
 	private Integer Gia;
 	private String Quan;
 	private String DiaChi;
-	private String MoTa;
 	private Integer IdUser;
+	private int state;    // 0 la chua dc duyet
 
-	public String getMoTa() {
-		return MoTa;
+	public int isState() {
+		return state;
 	}
 
-	public void setMoTa(String moTa) {
-		MoTa = moTa;
+	public void setState(int state) {
+		this.state = state;
 	}
 
-	public PhongTro( Integer id ,String img, String tieuDe, Integer dienTich, Integer gia,  String diaChi, String quan, String moTa,
-			Integer idUser) {
+	public PhongTro(Integer id , String img, String tieuDe, Integer dienTich, Integer gia, String diaChi, String quan,
+                    Integer idUser, Integer state) {
 		super();
 		Img = img;
 		Id = id;
@@ -31,11 +29,11 @@ public class PhongTro {
 		Gia = gia;
 		Quan = quan;
 		DiaChi = diaChi;
-		MoTa = moTa;
 		IdUser = idUser;
+		this.state = state;
 	}
 
-	public PhongTro(String img, String tieuDe, Integer dienTich, Integer gia, String diaChi,String quan,String moTa) {
+	public PhongTro(String img, String tieuDe, Integer dienTich, Integer gia, String diaChi, String quan) {
 		super();
 		Img = img;
 		TieuDe = tieuDe;
@@ -43,11 +41,11 @@ public class PhongTro {
 		Gia = gia;
 		DiaChi = diaChi;
 		Quan = quan;
-		MoTa = moTa;
+		
 	}
 
-	public PhongTro(String img, String tieuDe, Integer dienTich, Integer gia,  String diaChi, String quan,String moTa,
-			Integer idUser) {
+	public PhongTro(String img, String tieuDe, Integer dienTich, Integer gia, String diaChi, String quan,
+                    Integer idUser) {
 		super();
 		Img = img;
 	
@@ -57,23 +55,6 @@ public class PhongTro {
 		Quan = quan;
 		DiaChi = diaChi;
 		IdUser = idUser;
-		MoTa = moTa;
-	}
-
-	public Integer getIdUser() {
-		return IdUser;
-	}
-
-	public void setIdUser(Integer idUser) {
-		IdUser = idUser;
-	}
-
-	public String getDiaChi() {
-		return DiaChi;
-	}
-
-	public void setDiaChi(String diaChi) {
-		DiaChi = diaChi;
 	}
 
 	public String getImg() {
@@ -124,8 +105,23 @@ public class PhongTro {
 		Quan = quan;
 	}
 
-	public PhongTro() {
-		// TODO Auto-generated constructor stub
+	public String getDiaChi() {
+		return DiaChi;
 	}
 
+	public void setDiaChi(String diaChi) {
+		DiaChi = diaChi;
+	}
+
+	public Integer getIdUser() {
+		return IdUser;
+	}
+
+	public void setIdUser(Integer idUser) {
+		IdUser = idUser;
+	}
+
+	public int getState() {
+		return state;
+	}
 }
